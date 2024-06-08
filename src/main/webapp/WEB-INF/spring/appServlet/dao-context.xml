@@ -43,4 +43,6 @@
 	</bean>
 
 	<tx:annotation-driven />
+
+	<context:component-scan base-package="kr.ac.hansung.cse.dao" />
 </beans>
