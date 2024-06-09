@@ -21,10 +21,9 @@ public class HomeController {
 
 	private static final Logger logger= LoggerFactory.getLogger(HomeController.class);
 	//private static final Logger logger= LoggerFactory.getLogger("kr.ac.hansung.cse.controller.HomeController");
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request,  Locale locale, Model model) {
-			
 		
 		logger.info("info level: Welcome home! The client local is {}", locale);
 		

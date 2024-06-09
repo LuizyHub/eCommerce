@@ -72,6 +72,21 @@ public class CategoryProductsController {
 
 	@DeleteMapping("/{productId}")
 	public ResponseEntity<Void> removeProduct(@PathVariable Long categoryId, @PathVariable Long productId) {
+		Category category = categoryService.getCategoryById(categoryId);
+		if (category == null) {
+			throw new NotFoundException(categoryId);
+		}
 
+		Product product = productService.getProductById(productId);
+		if (product == null) {
+			throw new NotFoundException(productId);
+		}
+
+		if (!productService.hasCategory(product, category)) {
+			throw new IllegalArgumentException("Product " + productId + " doesn't contains category " + categoryId);
+		}
+
+		productService.removeCategory(product, category);
+		return ResponseEntity.noContent().build();
 	}
 }

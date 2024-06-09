@@ -66,8 +66,16 @@ public class ProductController {
 
 	@PutMapping("/{id}")
 	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto request) {
+		Product product = productService.getProductById(id);
+		if (product == null) {
+			throw new NotFoundException(id);
+		}
 
+		product.setName(request.getName());
+		product.setPrice(request.getPrice());
 
+		productService.updateProduct(product);
+		return ResponseEntity.ok(product);
 	}
 
 	@DeleteMapping("/{id}")

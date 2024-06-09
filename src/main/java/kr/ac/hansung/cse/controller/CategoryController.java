@@ -30,9 +30,11 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Category> retrieveCategory(@PathVariable Long id) {
-
-
-
+        Category category = categoryService.getCategoryById(id);
+        if (category == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(category);
     }
 
     @PostMapping
